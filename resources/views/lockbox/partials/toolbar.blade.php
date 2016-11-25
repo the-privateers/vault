@@ -2,15 +2,19 @@
 
 <div class="page-header clearfix" style="margin-top: 0;">
     <div class="row">
-        <div class="col-sm-8">
+        @php($canAdd = Auth::user()->canAddToCurrentVault())
+
+        <div class="col-sm-{{ ($canAdd) ? '8' : '12' }}">
 
             {!! Form::text('search', null, ['class' => 'form-control', 'placeholder' => 'Quick jump to lockbox...', 'role' => 'lockbox-autocomplete']) !!}
         </div>
 
+        @if($canAdd)
         <div class="col-sm-4">
 
             <a href="{{ route('lockbox.create') }}" class="btn btn-default btn-block">Create Lockbox</a>
         </div>
+        @endif
     </div>
 </div>
 

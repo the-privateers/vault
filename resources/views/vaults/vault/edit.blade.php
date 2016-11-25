@@ -60,6 +60,8 @@
             <thead>
                 <tr>
                     <th>Email</th>
+                    <th>Read-only</th>
+                    <th style="width: 1px;"></th>
                     <th style="width: 1px;"></th>
                 </tr>
             </thead>
@@ -67,6 +69,26 @@
                 @foreach($vault->users->except(Auth::user()->id) as $user)
                 <tr>
                     <td>{{ $user->email }}</td>
+                    <td>
+                        @if($user->pivot->read_only)
+                            <i class="fa fa-check"></i>
+                        @endif
+                    </td>
+                    <td>
+                        {!! Form::open(['route' => ['vault.user.edit', $vault->uuid]]) !!}
+                        {!! Form::hidden('vault', $vault->uuid) !!}
+                        {!! Form::hidden('user', $user->uuid) !!}
+
+                        @if($user->pivot->read_only)
+                            {!! Form::hidden('read_only', 0) !!}
+                            <button type="submit" class="btn btn-default btn-sm">Enable editing</button>
+                        @else
+                            {!! Form::hidden('read_only', 1) !!}
+                            <button type="submit" class="btn btn-default btn-sm">Make Read-only</button>
+                        @endif
+
+                        {!! Form::close() !!}
+                    </td>
                     <td>
                         @if( ! $user->owns($vault))
                         {!! Form::open(['route' => ['vault.user.destroy', $vault->uuid], 'method' => 'DELETE', 'role' => 'remove-collaborator']) !!}
@@ -90,6 +112,13 @@
             {!! Form::label('email', 'Email Address:') !!}
             {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'john@example.com']) !!}
 
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="read_only" value="1">
+
+                    Read-only access - collaborator will not be able to add or edit lockboxes in this vault
+                </label>
+            </div>
             @if ($errors->has('email'))
                 <span class="help-block">
                     <strong>{{ $errors->first('email') }}</strong>

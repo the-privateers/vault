@@ -20,7 +20,7 @@ class Vault extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withPivot('read_only');
     }
 
     public function lockboxes()

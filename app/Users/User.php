@@ -4,6 +4,7 @@ namespace Vault\Users;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 use Vault\Teams\Team;
 use Vault\Uuid\HasUuid;
 use Vault\Vaults\Vault;
@@ -33,7 +34,7 @@ class User extends Authenticatable
 
     public function vaults()
     {
-        return $this->belongsToMany(Vault::class);
+        return $this->belongsToMany(Vault::class)->withPivot('read_only');
     }
 
     public function currentVault()
@@ -57,5 +58,16 @@ class User extends Authenticatable
     {
         $this->current_vault_id = $vault;
         $this->save();
+    }
+
+    public function canAddToCurrentVault()
+    {
+        $relationship = DB::table('user_vault')
+            ->where('user_id', $this->id)
+            ->where('vault_id', $this->current_vault_id)
+            ->where('read_only', false)
+            ->first();
+
+        return ! empty($relationship);
     }
 }

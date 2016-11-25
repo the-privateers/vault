@@ -23,7 +23,7 @@ class UserController extends Controller
 
             if( ! in_array($user->id, $vault->users->pluck('id')->all()))
             {
-                $vault->users()->attach($user);
+                $vault->users()->attach($user, ['read_only' => (boolean) $request->get('read_only')]);
 
                 // Send a notification
                 $user->notify(new CollaboratorAdded(Auth::user(), $vault));
@@ -38,6 +38,19 @@ class UserController extends Controller
         {
             flash()->error('User not found');
         }
+
+        return redirect()->back();
+    }
+
+    public function update(Request $request, $uuid)
+    {
+        $user = (new UserRepository)->get($request->get('user'));
+
+        $vault = (new VaultRepository)->get($request->get('vault'));
+
+        $user->vaults()->updateExistingPivot($vault->id, ['read_only' => $request->get('read_only')]);
+
+        flash()->success('Collaborator updated');
 
         return redirect()->back();
     }

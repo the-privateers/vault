@@ -121,6 +121,11 @@ Route::group(['middleware' => 'auth'], function() {
             'as'    => 'vault.user.add'
         ]);
 
+        Route::post('vault/{uuid}/user/edit', [
+            'uses'   => 'UserController@update',
+            'as'    => 'vault.user.edit'
+        ]);
+
         Route::delete('vault/{uuid}/user', [
             'uses'   => 'UserController@destroy',
             'as'    => 'vault.user.destroy'

@@ -10,7 +10,9 @@
             {!! link_to_route('lockbox.show', $lockbox->name, $lockbox->uuid) !!}
         </h3>
 
+        @if($lockbox->canBeEditedBy(Auth::user()))
         <a href="{{ route('lockbox.edit', $lockbox->uuid) }}" class="btn btn-default btn-sm pull-right">Edit</a>
+        @endif
     </div>
 
     @if( ! empty($lockbox->description))
@@ -22,8 +24,9 @@
 @empty
 <div class="well text-center">
     <p class="lead">You have no lockboxes</p>
-
+    @if(Auth::user()->canAddToCurrentVault())
     <a href="{{ route('lockbox.create') }}" class="btn btn-default btn-lg">Create Your First One</a>
+    @endif
 </div>
 @endforelse
 

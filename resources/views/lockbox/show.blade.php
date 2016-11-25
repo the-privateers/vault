@@ -11,7 +11,9 @@
             <button class="btn btn-sm btn-empty" role="clipboard-copy" data-clipboard-text="{{ route('lockbox.show', $lockbox->uuid) }}" data-toggle="tooltip" title="Copy lockbox URL to clipboard"><i class="fa fa-link"></i></button>
         </h3>
 
+        @if($lockbox->canBeEditedBy(Auth::user()))
         <a href="{{ route('lockbox.edit', $lockbox->uuid) }}" class="btn btn-default btn-sm pull-right">Edit</a>
+        @endif
     </div>
 
     @if( ! empty($lockbox->description))
