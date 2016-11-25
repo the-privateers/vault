@@ -54,7 +54,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            @foreach(Auth::user()->vaults->except(Auth::user()->currentVault->id) as $vault)
+                            @foreach(Auth::user()->vaults->except(Auth::user()->current_vault_id) as $vault)
                                 <li><a href="{{ route('vault.show', $vault->uuid) }}">{{ $vault->name }}</a></li>
                             @endforeach
                         </ul>
