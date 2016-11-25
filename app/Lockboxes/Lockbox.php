@@ -11,7 +11,7 @@ class Lockbox extends Model
 {
     use HasUuid;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'notes'];
 
     public function vault()
     {

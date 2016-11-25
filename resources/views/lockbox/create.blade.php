@@ -103,6 +103,26 @@
 </div>
 
 <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Notes</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="form-group{{ $errors->has('notes') ? ' has-error' : '' }}">
+            {!! Form::label('notes', 'notes:', ['class' => 'sr-only']) !!}
+
+            {!! Form::textarea('notes', null, ['class' => 'form-control', 'placeholder' => 'Instructions, notes, extra information...']) !!}
+
+            @if ($errors->has('notes'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('notes') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
     <div class="panel-body">
         <!-- Submit field -->
         <div class="form-group">

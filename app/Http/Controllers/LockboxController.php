@@ -107,6 +107,22 @@ class LockboxController extends Controller
         return redirect()->back();
     }
 
+    public function updateNotes(Request $request, $uuid)
+    {
+        if( ! $this->lockboxAccessible($request->get('uuid')))
+        {
+            flash()->error('You do not have access to that lockbox');
+
+            return redirect()->route('lockbox.index');
+        }
+
+        $this->lockboxRepository->update($request->all());
+
+        flash()->success('Lockbox updated');
+
+        return redirect()->back();
+    }
+
     public function destroy(Request $request)
     {
         if( ! $this->lockboxAccessible($request->get('uuid')))

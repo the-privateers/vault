@@ -43,6 +43,15 @@
         </table>
     </div>
 </div>
+
+@if( ! empty($lockbox->notes))
+<div class="panel panel-default">
+    <div class="panel-body">
+        {!! parse_markdown($lockbox->notes) !!}
+    </div>
+</div>
+@endif
+
 @endsection
 
 @section('scripts')
