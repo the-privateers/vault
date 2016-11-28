@@ -121,7 +121,7 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Updates Notes</h3>
+        <h3 class="panel-title">Update Notes</h3>
     </div>
 
     <div class="panel-body">
@@ -132,7 +132,7 @@
         <div class="form-group{{ $errors->has('notes') ? ' has-error' : '' }}">
             {!! Form::label('notes', 'notes:', ['class' => 'sr-only']) !!}
 
-            {!! Form::textarea('notes', null, ['class' => 'form-control', 'placeholder' => 'Instructions, notes, extra information...']) !!}
+            {!! Form::textarea('notes', null, ['class' => 'form-control', 'placeholder' => 'Instructions, notes, extra information...', 'role' => 'editor']) !!}
 
             @if ($errors->has('notes'))
                 <span class="help-block">
@@ -173,8 +173,34 @@
     @parent
     <script src="/js/vendor/handlebars.js"></script>
     <script src="/js/vendor/bootbox.js"></script>
+    <script src="/js/vendor/tinymce/tinymce.min.js"></script>
 
     <script>
+        function tinymceInit()
+        {
+            tinymce.init({
+                selector: 'textarea[role="editor"]',
+                menubar : false,
+                content_css : '/js/vendor/tinymce/editor.css',
+                statusbar : false,
+                plugins: "link code paste",
+                toolbar: "bold italic styleselect | bullist numlist | link code",
+                valid_elements : '+*[*]',
+                convert_urls: false,
+                style_formats: [
+                    {title: "Header 1", format: "h1"},
+                    {title: "Header 2", format: "h2"},
+                    {title: "Header 3", format: "h3"},
+                    {title: "Header 4", format: "h4"},
+                    {title: "Header 5", format: "h5"},
+                    {title: "Header 6", format: "h6"},
+                    {title: "Blockquote", format: "blockquote"}
+                ]
+            });
+        }
+
+        tinymceInit();
+
         var counter = 1;
 
         $('[role="add-secret"]').on('click', function(e) {
