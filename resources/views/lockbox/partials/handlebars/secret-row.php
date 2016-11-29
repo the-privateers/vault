@@ -2,7 +2,7 @@
     <tr id="_{{ uuid }}">
         <td>
             <div class="form-group">
-                <input type="text" name="secrets[{{ uuid }}][key]" class="form-control" placeholder="Key" required>
+                <input type="text" name="secrets[{{ uuid }}][key]" class="form-control" placeholder="Key/Label" required>
             </div>
         </td>
 

@@ -36,7 +36,7 @@
                 <tr>
                     <td>{{ $secret->key }}</td>
                     <td>
-                        {{ $secret->present()->value() }}
+                        {!! $secret->present()->value() !!}
                         <button class="btn btn-empty" role="clipboard-copy" data-clipboard-text="{{  $secret->value }}" data-toggle="tooltip" title="Copy to clipboard"><i class="fa fa-clipboard"></i></button>
                     </td>
                 </tr>

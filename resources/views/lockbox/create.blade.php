@@ -49,7 +49,7 @@
         <table class="table table-striped" id="secrets-table">
             <thead>
             <tr>
-                <th style="width: 30%;">Key</th>
+                <th style="width: 30%;">Key/Label</th>
                 <th>Value</th>
                 <th style="width: 1px;"><i class="fa fa-user-secret" data-toggle="tooltip" title="Obscure value when viewing"></i></th>
                 <th style="width: 1px;"></th>
@@ -62,7 +62,7 @@
                         <div class="form-group{{ $errors->has('secrets.0.key') ? ' has-error' : '' }}">
                             {!! Form::label('secrets[0][key]', 'Key:', ['class' => 'sr-only']) !!}
 
-                            {!! Form::text('secrets[0][key]', null, ['class' => 'form-control', 'placeholder' => 'Key']) !!}
+                            {!! Form::text('secrets[0][key]', null, ['class' => 'form-control', 'placeholder' => 'Key/Label']) !!}
 
                             @if ($errors->has('secrets.0.key'))
                                 <span class="help-block">
