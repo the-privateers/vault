@@ -41,7 +41,11 @@
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ route('lockbox.index') }}">
                     <i class="icon icon-vault icon-2x"></i>
-                    <span class="_sr-only">{{ (Auth::user()->currentVault) ? Auth::user()->currentVault->name : config('app.name', 'Vault') }}</span>
+                    @if(Auth::guest())
+                    {{ config('app.name', 'Vault') }}
+                    @else
+                    {{ (Auth::user()->currentVault) ? Auth::user()->currentVault->name : config('app.name', 'Vault') }}
+                    @endif
                 </a>
             </div>
 

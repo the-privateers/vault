@@ -71,7 +71,7 @@
                     <td>{{ $user->email }}</td>
                     <td>
                         @if($user->pivot->read_only)
-                            <i class="fa fa-check"></i>
+                            <i class="icon-check"></i>
                         @endif
                     </td>
                     <td>

@@ -62,3 +62,12 @@
 .icon-key:before {
   content: "\68";
 }
+.icon-users:before {
+  content: "\69";
+}
+.icon-envelope:before {
+  content: "\6a";
+}
+.icon-check:before {
+  content: "\6b";
+}

@@ -26,4 +26,9 @@ h1.page-header a
     text-decoration: none;
 }
 
+h1.page-header a:hover
+{
+    color: #000;
+}
+
 
