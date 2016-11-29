@@ -1,4 +1,21 @@
 .btn-empty
 {
     background: none;
+    padding: 3px 10px;
+    font-size: 18px;
 }
+
+.navbar-default .navbar-brand
+{
+    padding: 10px 10px;
+    color: #aaa;
+}
+
+
+.navbar-default .navbar-brand i
+{
+    font-size: 30px;
+}
+
+
+

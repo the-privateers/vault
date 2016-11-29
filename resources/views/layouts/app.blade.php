@@ -12,8 +12,10 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/style.css?ck=2" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="/fonts/privateers/styles.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -38,7 +40,8 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ route('lockbox.index') }}">
-                    {{ config('app.name', 'Vault') }}
+                    <i class="icon-vault icon-2x"></i>
+                    <span class="sr-only">{{ config('app.name', 'Vault') }}</span>
                 </a>
             </div>
 
@@ -61,7 +64,7 @@
                     </li>
 
                     @if(Auth::user()->owns())
-                        <li>{!! link_to_route('vault.edit', 'Settings', Auth::user()->currentVault->uuid) !!}</li>
+                        <li><a href="{{ route('vault.edit', Auth::user()->currentVault->uuid) }}">Settings</a></li>
                     @endif
                 </ul>
                 @endif

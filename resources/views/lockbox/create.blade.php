@@ -51,7 +51,7 @@
             <tr>
                 <th style="width: 30%;">Key/Label</th>
                 <th>Value</th>
-                <th style="width: 1px;"><i class="fa fa-user-secret" data-toggle="tooltip" title="Obscure value when viewing"></i></th>
+                <th style="width: 1px;"><i class="icon-key" data-toggle="tooltip" title="Obscure value when viewing"></i></th>
                 <th style="width: 1px;"></th>
             </tr>
             </thead>

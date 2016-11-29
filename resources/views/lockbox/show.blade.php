@@ -8,7 +8,7 @@
         <h3 class="panel-title pull-left">
             {{ $lockbox->name }}
 
-            <button class="btn btn-sm btn-empty" role="clipboard-copy" data-clipboard-text="{{ route('lockbox.show', $lockbox->uuid) }}" data-toggle="tooltip" title="Copy lockbox URL to clipboard"><i class="fa fa-link"></i></button>
+            <button class="btn btn-sm btn-empty" role="clipboard-copy" data-clipboard-text="{{ route('lockbox.show', $lockbox->uuid) }}" data-toggle="tooltip" title="Copy lockbox URL to clipboard"><i class="icon-share"></i></button>
         </h3>
 
         @if($lockbox->canBeEditedBy(Auth::user()))
@@ -37,7 +37,7 @@
                     <td>{{ $secret->key }}</td>
                     <td>
                         {!! $secret->present()->value() !!}
-                        <button class="btn btn-empty" role="clipboard-copy" data-clipboard-text="{{  $secret->value }}" data-toggle="tooltip" title="Copy to clipboard"><i class="fa fa-clipboard"></i></button>
+                        <button class="btn btn-empty" role="clipboard-copy" data-clipboard-text="{{  $secret->value }}" data-toggle="tooltip" title="Copy to clipboard"><i class="icon-clipboard"></i></button>
                     </td>
                 </tr>
             @endforeach
