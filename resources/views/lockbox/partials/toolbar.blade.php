@@ -1,4 +1,6 @@
-<h1 class="page-header text-center" style="margin-top: 0; margin-bottom: 12px;">Lockboxes</h1>
+<h1 class="page-header text-center" style="margin-top: 0; margin-bottom: 12px;">
+    <i class="icon-key"></i><br />
+    Lockboxes</h1>
 
 <div class="page-header clearfix" style="margin-top: 0;">
     <div class="row">

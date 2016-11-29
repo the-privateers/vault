@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-    <link href="/css/style.css?ck=2" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     <!-- Fonts -->
     <link href="/fonts/privateers/styles.css" rel="stylesheet">

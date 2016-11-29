@@ -1,4 +1,8 @@
-<h1 class="page-header text-center" style="margin-top: 0; margin-bottom: 12px;">Vaults</h1>
+<h1 class="page-header text-center" style="margin-top: 0; margin-bottom: 12px;">
+    <i class="icon-vault"></i><br />
+    Vaults
+</h1>
+
 <div class="page-header clearfix" style="margin-top: 0;">
     <div class="row">
         <div class="col-sm-4 col-sm-offset-8">
