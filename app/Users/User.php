@@ -47,9 +47,16 @@ class User extends Authenticatable
         return $this->hasMany(Vault::class, 'owner_id');
     }
 
-    public function owns($vault)
+    public function owns($vault = null)
     {
-        if ( ! is_object($vault)) $vault = (new VaultRepository)->get($vault);
+        if ( is_null($vault))
+        {
+            $vault = $this->currentVault;
+            
+        } elseif ( ! is_object($vault))
+        {
+            $vault = (new VaultRepository)->get($vault);
+        }
 
         return ($vault->owner_id == $this->id);
     }

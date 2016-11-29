@@ -59,6 +59,10 @@
                             @endforeach
                         </ul>
                     </li>
+
+                    @if(Auth::user()->owns())
+                        <li>{!! link_to_route('vault.edit', 'Settings', Auth::user()->currentVault->uuid) !!}</li>
+                    @endif
                 </ul>
                 @endif
 
