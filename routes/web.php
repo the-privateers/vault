@@ -48,6 +48,11 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'lockbox.edit'
     ]);
 
+    Route::post('lockbox/{uuid}/move', [
+        'uses'  => 'LockboxController@move',
+        'as'    => 'lockbox.move'
+    ]);
+
     Route::delete('lockbox', [
         'uses'  => 'LockboxController@destroy',
         'as'    => 'lockbox.destroy'

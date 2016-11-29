@@ -37,6 +37,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Vault::class)->withPivot('read_only');
     }
 
+    public function writableVaults()
+    {
+        return $this->belongsToMany(Vault::class)->wherePivot('read_only', false);
+    }
+
     public function currentVault()
     {
         return $this->belongsTo(Vault::class);
@@ -52,7 +57,7 @@ class User extends Authenticatable
         if ( is_null($vault))
         {
             $vault = $this->currentVault;
-            
+
         } elseif ( ! is_object($vault))
         {
             $vault = (new VaultRepository)->get($vault);

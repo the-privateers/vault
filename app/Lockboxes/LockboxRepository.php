@@ -68,6 +68,17 @@ class LockboxRepository
         return $lockbox;
     }
 
+    public function move($formData)
+    {
+        $lockbox = $this->get($formData['uuid']);
+
+        $vault = Vault::where('uuid', $formData['vault'])->firstOrFail();
+
+        $vault->lockboxes()->save($lockbox);
+
+        return;
+    }
+
     public function destroy($uuid)
     {
         $lockbox = $this->get($uuid);
