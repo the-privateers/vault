@@ -5,7 +5,13 @@
 
 <div class="page-header clearfix" style="margin-top: 0;">
     <div class="row">
-        <div class="col-sm-4 col-sm-offset-8">
+        <div class="col-sm-4">
+            @if (Request::route()->getName() != 'vault.index')
+            <a href="{{ route('vault.index') }}" class="btn btn-default btn-block">Back to Vaults</a>
+            @endif
+        </div>
+
+        <div class="col-sm-4 col-sm-offset-4">
             <a href="{{ route('vault.create') }}" class="btn btn-default btn-block">Create Vault</a>
         </div>
     </div>
