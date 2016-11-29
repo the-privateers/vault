@@ -48,21 +48,10 @@ Route::group(['middleware' => 'auth'], function() {
         'as'    => 'lockbox.edit'
     ]);
 
-    Route::post('lockbox/{uuid}/notes', [
-        'uses'  => 'LockboxController@updateNotes',
-        'as'    => 'lockbox.notes'
-    ]);
-
     Route::delete('lockbox', [
         'uses'  => 'LockboxController@destroy',
         'as'    => 'lockbox.destroy'
     ]);
-
-    Route::post('secret/update', [
-        'uses'  => 'SecretController@update',
-        'as'    => 'secret.update'
-    ]);
-
 
     Route::get('user', [
         'uses'  => 'UserController@edit',

@@ -3,7 +3,11 @@
 @section('content')
     @include('lockbox.partials.toolbar')
 
-<div class="panel panel-default">
+    {!! Form::model($lockbox, ['id' => 'lockbox-form']) !!}
+
+    {!! Form::hidden('uuid',null) !!}
+
+    <div class="panel panel-default">
     <div class="panel-heading clearfix">
         <h3 class="panel-title pull-left">Edit Lockbox</h3>
 
@@ -11,9 +15,6 @@
     </div>
 
     <div class="panel-body">
-        {!! Form::model($lockbox) !!}
-
-            {!! Form::hidden('uuid',null) !!}
 
             <!-- Name Form Input -->
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -44,7 +45,7 @@
             <div class="form-group">
                 {!! Form::submit('Save Changes', ['class' => 'btn btn-primary']) !!}
             </div>
-        {!! Form::close() !!}
+        {{--{!! Form::close() !!}--}}
     </div>
 </div>
 
@@ -54,9 +55,7 @@
     </div>
 
     <div class="panel-body">
-        {!! Form::open(['route' => 'secret.update', 'id' => 'secrets-form']) !!}
-
-        {!! Form::hidden('lockbox', $lockbox->uuid) !!}
+        {{--{!! Form::open(['route' => 'secret.update', 'id' => 'secrets-form']) !!}--}}
 
         <table class="table table-striped" id="secrets-table">
             <thead>
@@ -115,7 +114,6 @@
         <div class="form-group">
             {!! Form::submit('Save Changes', ['class' => 'btn btn-primary']) !!}
         </div>
-        {!! Form::close() !!}
     </div>
 </div>
 
@@ -125,10 +123,6 @@
     </div>
 
     <div class="panel-body">
-        {!! Form::model($lockbox, ['route' => ['lockbox.notes', $lockbox->uuid]]) !!}
-
-        {!! Form::hidden('uuid',null) !!}
-
         <div class="form-group{{ $errors->has('notes') ? ' has-error' : '' }}">
             {!! Form::label('notes', 'notes:', ['class' => 'sr-only']) !!}
 
@@ -146,9 +140,9 @@
             {!! Form::submit('Save Changes', ['class' => 'btn btn-primary']) !!}
         </div>
 
-        {!! Form::close() !!}
     </div>
 </div>
+{!! Form::close() !!}
 
 <div class="panel panel-danger">
     <div class="panel-heading">
@@ -229,7 +223,7 @@
             // Append something to the form
             $('<input type="hidden" value="1" />')
                     .attr("name", 'secrets[' + uuid + '][destroy]')
-                    .appendTo( $('#secrets-form') );
+                    .appendTo( $('#lockbox-form') );
 
         });
 

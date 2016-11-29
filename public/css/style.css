@@ -7,15 +7,23 @@
 
 .navbar-default .navbar-brand
 {
-    padding: 10px 10px;
+    position: relative;
+    padding-left: 50px;
     color: #aaa;
 }
 
-
 .navbar-default .navbar-brand i
 {
+    position: absolute;
+    left: 10px;
+    top: 10px;
     font-size: 30px;
 }
 
+h1.page-header a
+{
+    color: inherit;
+    text-decoration: none;
+}
 
 

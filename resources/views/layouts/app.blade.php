@@ -40,8 +40,8 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ route('lockbox.index') }}">
-                    <i class="icon-vault icon-2x"></i>
-                    <span class="sr-only">{{ config('app.name', 'Vault') }}</span>
+                    <i class="icon icon-vault icon-2x"></i>
+                    <span class="_sr-only">{{ (Auth::user()->currentVault) ? Auth::user()->currentVault->name : config('app.name', 'Vault') }}</span>
                 </a>
             </div>
 
@@ -49,22 +49,26 @@
                 <!-- Left Side Of Navbar -->
                 @if (Auth::guest())
 
-                @elseif(Auth::user()->vaults()->count() > 1)
+                @else
+
+
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ (Auth::user()->currentVault) ? Auth::user()->currentVault->name : 'Your Vaults' }} <span class="caret"></span>
-                        </a>
-
-                        <ul class="dropdown-menu" role="menu">
-                            @foreach(Auth::user()->vaults->except(Auth::user()->current_vault_id) as $vault)
-                                <li><a href="{{ route('vault.show', $vault->uuid) }}">{{ $vault->name }}</a></li>
-                            @endforeach
-                        </ul>
-                    </li>
-
                     @if(Auth::user()->owns())
                         <li><a href="{{ route('vault.edit', Auth::user()->currentVault->uuid) }}">Settings</a></li>
+                    @endif
+
+                    @if(Auth::user()->vaults()->count() > 1)
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                Switch <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                @foreach(Auth::user()->vaults->except(Auth::user()->current_vault_id) as $vault)
+                                    <li><a href="{{ route('vault.show', $vault->uuid) }}">{{ $vault->name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
                     @endif
                 </ul>
                 @endif
@@ -116,6 +120,13 @@
             </div>
         </div>
     </div>
+
+    <footer class="container">
+        <p class="text-center small">
+            <a href="{{ route('vault.index') }}">Manage Vaults</a>
+        </p>
+
+    </footer>
 
 
     @section('scripts')
