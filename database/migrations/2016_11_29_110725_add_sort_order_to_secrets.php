@@ -14,6 +14,7 @@ class AddSortOrderToSecrets extends Migration
     public function up()
     {
         Schema::table('secrets', function (Blueprint $table) {
+            $table->integer('linked_lockbox_id')->unsigned()->default(0)->after('value');
             $table->integer('sort_order')->unsigned()->default(0)->after('paranoid');
         });
 
@@ -36,7 +37,7 @@ class AddSortOrderToSecrets extends Migration
     public function down()
     {
         Schema::table('secrets', function (Blueprint $table) {
-            $table->dropColumn(['sort_order']);
+            $table->dropColumn(['sort_order', 'linked_lockbox_id']);
         });
     }
 }

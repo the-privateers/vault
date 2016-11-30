@@ -10,7 +10,10 @@ class SecretPresenter extends Presenter
 
     public function value()
     {
-        if($this->entity->paranoid)
+        if($lockbox = $this->entity->linkedLockbox)
+        {
+            return link_to_route('lockbox.show', $lockbox->name, $lockbox->uuid, ['target' => '_blank']);
+        } elseif($this->entity->paranoid)
         {
             $characters = (strlen($this->entity->value) > 16) ? 16 : strlen($this->entity->value);
 

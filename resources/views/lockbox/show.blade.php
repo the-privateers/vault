@@ -37,7 +37,10 @@
                     <td>{{ $secret->key }}</td>
                     <td>
                         {!! $secret->present()->value() !!}
+
+                        @if( empty($secret->linked_lockbox_id))
                         <button class="btn btn-empty" role="clipboard-copy" data-clipboard-text="{{  $secret->value }}" data-toggle="tooltip" title="Copy to clipboard"><i class="icon-clipboard"></i></button>
+                        @endif
                     </td>
                 </tr>
             @endforeach

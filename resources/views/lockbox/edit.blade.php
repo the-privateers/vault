@@ -80,6 +80,8 @@
                             @endif
                         </div>
                     </td>
+
+                    @if( empty($secret->linked_lockbox_id))
                     <td>
                         <div class="form-group{{ $errors->has('secrets.' . $secret->uuid . 'value') ? ' has-error' : '' }}">
                             {!! Form::label('secrets[' . $secret->uuid . '][value]', 'Value:', ['class' => 'sr-only']) !!}
@@ -96,6 +98,17 @@
                     <td>
                         {!! Form::checkbox('secrets[' . $secret->uuid . '][paranoid]', 1, (boolean) $secret->paranoid) !!}
                     </td>
+                    @else
+                        <td>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="icon-key"></i></div>
+                                    {!! Form::select('secrets[' . $secret->uuid . '][linked_lockbox_id]', $linkableLockboxes, $secret->linked_lockbox_id, ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                    @endif
                     <td>
                         <button class="btn btn-default btn-block" role="remove-secret" data-uuid="{{ $secret->uuid }}">Delete</button>
                     </td>
@@ -105,7 +118,11 @@
         </table>
 
         <div class="form-group">
-            <button class="btn btn-default" role="add-secret">Add Another Secret</button>
+            <button class="btn btn-default" role="add-secret">Add A Secret</button>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-default" role="add-lockbox">Add A Link to Another Lockbox</button>
         </div>
 
         <!-- Submit field -->
@@ -234,6 +251,21 @@
 
         });
 
+        $('[role="add-lockbox"]').on('click', function(e) {
+            e.preventDefault();
+
+            var uuid = counter;
+
+            var source   = $("#lockbox-row").html();
+            var template = Handlebars.compile(source);
+            var html    = template({uuid: uuid });
+
+            $('#secrets-table tbody').append(html);
+
+            counter++;
+
+        });
+
         $(document).on('click', '[role="remove-secret"]', function(e)
         {
             e.preventDefault();
@@ -268,4 +300,5 @@
     </script>
 
     @include('lockbox.partials.handlebars.secret-row')
+    @include('lockbox.partials.handlebars.lockbox-row')
 @endsection

@@ -5,6 +5,7 @@ namespace Vault\Secrets;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
+use Vault\Lockboxes\Lockbox;
 use Vault\Uuid\HasUuid;
 
 class Secret extends Model
@@ -13,7 +14,12 @@ class Secret extends Model
 
     protected $presenter = SecretPresenter::class;
 
-    protected $fillable = ['key', 'value', 'paranoid'];
+    protected $fillable = ['key', 'value', 'linked_lockbox_id', 'paranoid'];
+
+    public function linkedLockbox()
+    {
+        return $this->belongsTo(Lockbox::class, 'linked_lockbox_id');
+    }
 
     public function getKeyAttribute()
     {

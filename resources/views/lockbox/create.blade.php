@@ -57,47 +57,53 @@
             </thead>
 
             <tbody>
-                <tr id="_0">
-                    <td>
-                        <div class="form-group{{ $errors->has('secrets.0.key') ? ' has-error' : '' }}">
-                            {!! Form::label('secrets[0][key]', 'Key:', ['class' => 'sr-only']) !!}
+                {{--<tr id="_0">--}}
+                    {{--<td>--}}
+                        {{--<div class="form-group{{ $errors->has('secrets.0.key') ? ' has-error' : '' }}">--}}
+                            {{--{!! Form::label('secrets[0][key]', 'Key:', ['class' => 'sr-only']) !!}--}}
 
-                            {!! Form::text('secrets[0][key]', null, ['class' => 'form-control', 'placeholder' => 'Key/Label']) !!}
+                            {{--{!! Form::text('secrets[0][key]', null, ['class' => 'form-control', 'placeholder' => 'Key/Label']) !!}--}}
 
-                            @if ($errors->has('secrets.0.key'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('secrets.0.key') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </td>
+                            {{--@if ($errors->has('secrets.0.key'))--}}
+                                {{--<span class="help-block">--}}
+                                    {{--<strong>{{ $errors->first('secrets.0.key') }}</strong>--}}
+                                {{--</span>--}}
+                            {{--@endif--}}
+                        {{--</div>--}}
+                    {{--</td>--}}
 
-                    <td>
-                        <div class="form-group{{ $errors->has('secrets.0.value') ? ' has-error' : '' }}">
-                            {!! Form::label('secrets[0][value]', 'Description:', ['class' => 'sr-only']) !!}
+                    {{--<td>--}}
+                        {{--<div class="form-group{{ $errors->has('secrets.0.value') ? ' has-error' : '' }}">--}}
+                            {{--{!! Form::label('secrets[0][value]', 'Description:', ['class' => 'sr-only']) !!}--}}
 
-                            {!! Form::text('secrets[0][value]', null, ['class' => 'form-control', 'placeholder' => 'Value']) !!}
+                            {{--{!! Form::text('secrets[0][value]', null, ['class' => 'form-control', 'placeholder' => 'Value']) !!}--}}
 
-                            @if ($errors->has('secrets.0.value'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('secrets.0.value') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </td>
+                            {{--@if ($errors->has('secrets.0.value'))--}}
+                                {{--<span class="help-block">--}}
+                                    {{--<strong>{{ $errors->first('secrets.0.value') }}</strong>--}}
+                                {{--</span>--}}
+                            {{--@endif--}}
+                        {{--</div>--}}
+                    {{--</td>--}}
 
-                    <td>
-                        {!! Form::checkbox('secrets[0][paranoid]', 1) !!}
-                    </td>
+                    {{--<td>--}}
+                        {{--{!! Form::checkbox('secrets[0][paranoid]', 1) !!}--}}
+                    {{--</td>--}}
 
-                    <td>
-                        <button class="btn btn-default btn-block" role="remove-secret" data-uuid="_0">Delete</button>
-                    </td>
-                </tr>
+                    {{--<td>--}}
+                        {{--<button class="btn btn-default btn-block" role="remove-secret" data-uuid="_0">Delete</button>--}}
+                    {{--</td>--}}
+                {{--</tr>--}}
             </tbody>
         </table>
 
-        <button class="btn btn-default" role="add-secret">Add Another Secret</button>
+        <div class="form-group">
+            <button class="btn btn-default" role="add-secret">Add A Secret</button>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-default" role="add-lockbox">Add A Link to Another Lockbox</button>
+        </div>
 
     </div>
 </div>
@@ -182,6 +188,22 @@
 
         });
 
+        $('[role="add-lockbox"]').on('click', function(e) {
+            e.preventDefault();
+
+            var uuid = counter;
+
+            var source   = $("#lockbox-row").html();
+            var template = Handlebars.compile(source);
+            var html    = template({uuid: uuid });
+
+            $('#secrets-table tbody').append(html);
+
+            counter++;
+
+        });
+
+
         $(document).on('click', '[role="remove-secret"]', function(e)
         {
             e.preventDefault();
@@ -203,4 +225,6 @@
     </script>
 
     @include('lockbox.partials.handlebars.secret-row')
+    @include('lockbox.partials.handlebars.lockbox-row')
+
 @endsection

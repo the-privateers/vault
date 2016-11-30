@@ -39,6 +39,22 @@ class LockboxRepository
             ->orderBy('name')->get();
     }
 
+    public function getDropdownFor($user, $ignore = null)
+    {
+        $lockboxes = $this->getListFor($user);
+
+        $array = [];
+
+        foreach($lockboxes as $lockbox)
+        {
+            if($lockbox->id == $ignore) continue;
+            
+            $array[$lockbox->id] = $lockbox->name . ' [' . $lockbox->vault->name . ']';
+        }
+
+        return $array;
+    }
+
     public function create($formData, $control = false)
     {
         // Identify the Vault

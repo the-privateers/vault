@@ -86,8 +86,10 @@ class LockboxController extends Controller
 
             return redirect()->route('lockbox.index');
         }
+        
+        $linkableLockboxes = $this->lockboxRepository->getDropdownFor(Auth::user(), $lockbox->id);
 
-        return view('lockbox.edit', compact('lockbox'));
+        return view('lockbox.edit', compact('lockbox', 'linkableLockboxes'));
     }
 
     public function update(UpdateRequest $request, $uuid)
