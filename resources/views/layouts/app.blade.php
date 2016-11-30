@@ -127,7 +127,9 @@
 
     <footer class="container">
         <p class="text-center small">
-            <a href="{{ route('vault.index') }}">Manage Vaults</a>
+            @if (Auth::check())
+                <a href="{{ route('vault.index') }}">Manage Vaults</a>
+            @endif
         </p>
 
     </footer>
