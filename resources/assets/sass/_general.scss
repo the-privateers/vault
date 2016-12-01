@@ -1,0 +1,41 @@
+.btn-empty
+{
+  background: none;
+  padding: 3px 10px;
+  font-size: 18px;
+}
+
+.navbar-default
+{
+  .navbar-brand
+  {
+    position: relative;
+    padding-left: 50px;
+    color: #aaa;
+
+    i
+    {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      font-size: 30px;
+    }
+  }
+}
+
+
+h1.page-header
+{
+  a
+  {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover
+    {
+      color: #000;
+    }
+  }
+}
+
+

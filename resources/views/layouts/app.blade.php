@@ -11,8 +11,7 @@
     <title>{{ config('app.name', 'Vault') }}</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/app.css?ck=1" rel="stylesheet">
 
     <!-- Fonts -->
     <link href="/fonts/privateers/styles.css" rel="stylesheet">
