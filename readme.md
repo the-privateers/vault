@@ -1,6 +1,6 @@
 # Vault
 
-### Simple Password Management for Teams
+### Secure All The Things!
 
 Vault is a team password/credential management solution built on top of the popular Laravel framework.  Securely store and share credentials of any kind across teams.
 

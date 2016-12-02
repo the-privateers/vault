@@ -14,7 +14,7 @@ class Secret extends Model
 
     protected $presenter = SecretPresenter::class;
 
-    protected $fillable = ['key', 'value', 'linked_lockbox_id', 'paranoid'];
+    protected $fillable = ['key', 'value', 'linked_lockbox_id', 'paranoid', 'sort_order'];
 
     public function linkedLockbox()
     {

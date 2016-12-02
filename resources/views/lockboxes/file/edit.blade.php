@@ -8,27 +8,25 @@
     <div class="panel panel-default has-tabs">
 
         @if($lockbox->files()->count())
-        <div class="panel-body">
-            <table class="table table-striped">
-                <tbody>
-                    @foreach($lockbox->files as $file)
-                        <tr id="{{ $file->uuid }}">
-                            <td>{{ $file->original_name }}</td>
-                            <td>{{ byte_format($file->size) }}</td>
-                            <td class="btn-column">
-                                <a href="{!! $file->present()->download() !!}" class="btn btn-default btn-sm">Download</a>
-                            </td>
-                            <td class="btn-column">
-                                {!! Form::open(['route' => 'file.destroy', 'method' => 'delete', 'role' => 'destroy-file']) !!}
-                                    {!! Form::hidden('uuid', $file->uuid) !!}
-                                    {!! Form::submit('Remove', ['class' => 'btn btn-default btn-sm']) !!}
-                                {!! Form::close() !!}
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+        <table class="table table-striped table-panel">
+            <tbody>
+                @foreach($lockbox->files as $file)
+                    <tr id="{{ $file->uuid }}">
+                        <td>{{ $file->original_name }}</td>
+                        <td>{{ byte_format($file->size) }}</td>
+                        <td class="btn-column">
+                            <a href="{!! $file->present()->download() !!}" class="btn btn-default btn-sm">Download</a>
+                        </td>
+                        <td class="btn-column">
+                            {!! Form::open(['route' => 'file.destroy', 'method' => 'delete', 'role' => 'destroy-file']) !!}
+                                {!! Form::hidden('uuid', $file->uuid) !!}
+                                {!! Form::submit('Remove', ['class' => 'btn btn-default btn-sm']) !!}
+                            {!! Form::close() !!}
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 
     <div class="panel panel-default">

@@ -5802,4 +5802,37 @@ th.btn-column,
 td.btn-column {
   width: 1px; }
 
+.table-sortable tr.placeholder {
+  display: block;
+  background: red;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: none; }
+  .table-sortable tr.placeholder:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-left-color: red;
+    margin-top: -5px;
+    left: -5px;
+    border-right: none; }
+
+.table-sortable tr td.sort-handle {
+  background: #eee;
+  color: #bbb;
+  cursor: move;
+  width: 1px; }
+
+.table-sortable tr td {
+  vertical-align: middle; }
+
+.table-panel tr td:first-child {
+  padding-left: 15px; }
+
+.table-panel tr td:last-child {
+  padding-right: 15px; }
+
 /*# sourceMappingURL=app.css.map */

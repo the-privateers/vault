@@ -6,23 +6,28 @@
     @include('lockboxes.partials.tabs', ['tab' => 'secrets'])
 
     <div class="panel panel-default has-tabs">
-        <div class="panel-body">
+
             {!! Form::open(['id' => 'secrets-form']) !!}
 
             {!! Form::hidden('lockbox', $lockbox->uuid) !!}
 
-            <table class="table table-striped" id="secrets-table">
+            <table class="table table-striped table-sortable" id="secrets-table">
                 <thead>
                 <tr>
+                    <th class="btn-column"></th>
                     <th style="width: 30%;">Key/Label</th>
                     <th>Value</th>
-                    <th style="width: 1px;"><i class="icon-key" data-toggle="tooltip" title="Obscure value when viewing"></i></th>
-                    <th style="width: 1px;"></th>
+                    <th class="btn-column"><i class="icon-key" data-toggle="tooltip" title="Obscure value when viewing"></i></th>
+                    <th class="btn-column"></th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($lockbox->secrets as $secret)
                     <tr id="{{ $secret->uuid }}">
+                        <td class="sort-handle">
+                            <i class="icon-arrows"></i>
+                            {!! Form::hidden('secrets[' . $secret->uuid . '][sort_order]', $secret->sort_order, ['role' => 'sort-order']) !!}
+                        </td>
                         <td>
                             <div class="form-group{{ $errors->has('secrets.' . $secret->uuid . 'key') ? ' has-error' : '' }}">
                                 {!! Form::label('secrets[' . $secret->uuid . '][key]', 'Key:', ['class' => 'sr-only']) !!}
@@ -72,7 +77,7 @@
                 @endforeach
                 </tbody>
             </table>
-
+        <div class="panel-body">
             <div class="form-group">
                 <button class="btn btn-default" role="add-secret">Add A Secret</button>
             </div>
@@ -85,14 +90,16 @@
             <div class="form-group">
                 {!! Form::submit('Save Changes', ['class' => 'btn btn-primary']) !!}
             </div>
-            {!! Form::close() !!}
         </div>
+        {!! Form::close() !!}
     </div>
 @endsection
 
 @section('scripts')
     @parent
     <script src="/js/vendor/handlebars.js"></script>
+    <script src="/js/vendor/jquery.sortable.min.js"></script>
+
 
     <script>
         var counter = 1;
@@ -107,6 +114,8 @@
             var html    = template({uuid: uuid });
 
             $('#secrets-table tbody').append(html);
+
+            doSorting();
 
             counter++;
 
@@ -123,6 +132,8 @@
 
             $('#secrets-table tbody').append(html);
 
+            doSorting();
+
             counter++;
 
         });
@@ -135,6 +146,8 @@
 
             $('#' + uuid).remove();
 
+            doSorting();
+
             // Append something to the form
             $('<input type="hidden" value="1" />')
                     .attr("name", 'secrets[' + uuid + '][destroy]')
@@ -145,6 +158,40 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         });
+
+        function initSorting()
+        {
+            if($('#secrets-table').length) {
+                $('#secrets-table').sortable({
+                    group: 'secrets',
+                    containerSelector: 'table',
+                    itemPath: '> tbody',
+                    itemSelector: 'tr',
+                    placeholder: '<tr class="placeholder"/>',
+                    handle: 'td.sort-handle',
+                    onDrop: function ($item, container, _super) {
+                        $item.removeClass(container.group.options.draggedClass).removeAttr('style');
+                        $('body').removeClass(container.group.options.bodyClass);
+
+                        doSorting();
+
+                        _super($item, container);
+                    }
+                });
+            }
+        }
+
+        function doSorting()
+        {
+            var i = 0;
+            $('#secrets-table tbody tr').each(function() {
+                $('[role="sort-order"]', this).val(i);
+
+                i++;
+            });
+        }
+
+        initSorting();
 
     </script>
 

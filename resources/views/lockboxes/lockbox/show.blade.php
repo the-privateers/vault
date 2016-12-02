@@ -33,25 +33,23 @@
         @endif
     </div>
 
-    <div class="panel-body">
 
-        <table class="table table-striped">
-            <tbody>
-            @foreach($lockbox->secrets as $secret)
-                <tr>
-                    <td>{{ $secret->key }}</td>
-                    <td>
-                        {!! $secret->present()->value() !!}
+    <table class="table table-striped table-panel">
+        <tbody>
+        @foreach($lockbox->secrets as $secret)
+            <tr>
+                <td>{{ $secret->key }}</td>
+                <td>
+                    {!! $secret->present()->value() !!}
 
-                        @if( empty($secret->linked_lockbox_id))
-                        <button class="btn btn-empty" role="clipboard-copy" data-clipboard-text="{{  $secret->value }}" data-toggle="tooltip" title="Copy to clipboard"><i class="icon-clipboard"></i></button>
-                        @endif
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
+                    @if( empty($secret->linked_lockbox_id))
+                    <button class="btn btn-empty" role="clipboard-copy" data-clipboard-text="{{  $secret->value }}" data-toggle="tooltip" title="Copy to clipboard"><i class="icon-clipboard"></i></button>
+                    @endif
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
 </div>
 @endif
 
@@ -65,21 +63,19 @@
         @endif
     </div>
 
-    <div class="panel-body">
-        <table class="table table-striped">
-            <tbody>
-            @foreach($lockbox->files as $file)
-                <tr>
-                    <td>{{ $file->original_name }}</td>
-                    <td>{{ byte_format($file->size) }}</td>
-                    <td class="btn-column">
-                        <a href="{!! $file->present()->download() !!}" class="btn btn-default btn-sm">Download</a>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
+    <table class="table table-striped table-panel">
+        <tbody>
+        @foreach($lockbox->files as $file)
+            <tr>
+                <td>{{ $file->original_name }}</td>
+                <td>{{ byte_format($file->size) }}</td>
+                <td class="btn-column">
+                    <a href="{!! $file->present()->download() !!}" class="btn btn-default btn-sm">Download</a>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
 </div>
 @endif
 

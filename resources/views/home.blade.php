@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name') }}</title>
+        <title>{{ config('app.name', 'Vault') }} - Secure All The Things!</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -83,7 +83,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     {{ config('app.name') }}<br />
-                    <small>Simple Password Management for Teams</small>
+                    <small>Secure All The Things!</small>
                 </div>
 
                 <div class="links">

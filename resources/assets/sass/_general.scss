@@ -61,3 +61,55 @@ td.btn-column
 {
   width: 1px;
 }
+
+.table-sortable tr {
+
+  &.placeholder
+  {
+    display: block;
+    background: red;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: none;
+
+    &:before
+    {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: 5px solid transparent;
+      border-left-color: red;
+      margin-top: -5px;
+      left: -5px;
+      border-right: none;
+    }
+  }
+
+  td.sort-handle
+  {
+    background: #eee;
+    color: #bbb;
+    cursor: move;
+    width: 1px;
+  }
+
+  td
+  {
+    vertical-align: middle;
+  }
+}
+
+.table-panel tr
+{
+  td:first-child
+  {
+    padding-left: $grid-gutter-width / 2;
+  }
+
+  td:last-child
+  {
+    padding-right: $grid-gutter-width / 2;
+  }
+}

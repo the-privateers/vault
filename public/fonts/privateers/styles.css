@@ -71,3 +71,9 @@
 .icon-check:before {
   content: "\6b";
 }
+.icon-ellipsis:before {
+  content: "\6c";
+}
+.icon-arrows:before {
+  content: "\6d";
+}

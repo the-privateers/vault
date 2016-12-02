@@ -23,7 +23,7 @@ class Lockbox extends Model
 
     public function secrets()
     {
-        return $this->hasMany(Secret::class);
+        return $this->hasMany(Secret::class)->orderBy('sort_order');
     }
 
     public function files()
