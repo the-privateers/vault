@@ -5773,13 +5773,9 @@ button.close {
 
 .navbar-default .navbar-brand {
   position: relative;
-  padding-left: 50px;
-  color: #aaa; }
-  .navbar-default .navbar-brand i {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    font-size: 30px; }
+  padding-top: 10px;
+  color: #aaa;
+  font-size: 30px; }
 
 h1.page-header a {
   color: inherit;

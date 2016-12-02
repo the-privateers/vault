@@ -43,11 +43,11 @@
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ route('lockbox.index') }}">
                     <i class="icon icon-vault icon-2x"></i>
-                    @if(Auth::guest())
-                    {{ config('app.name', 'Vault') }}
-                    @else
-                    {{ (Auth::user()->currentVault) ? Auth::user()->currentVault->name : config('app.name', 'Vault') }}
-                    @endif
+                    {{--@if(Auth::guest())--}}
+                    {{--{{ config('app.name', 'Vault') }}--}}
+                    {{--@else--}}
+                    {{--{{ (Auth::user()->currentVault) ? Auth::user()->currentVault->name : config('app.name', 'Vault') }}--}}
+                    {{--@endif--}}
                 </a>
             </div>
 
@@ -57,10 +57,6 @@
 
                 @else
                 <ul class="nav navbar-nav">
-                    @if(Auth::user()->owns())
-                        <li><a href="{{ route('vault.edit', Auth::user()->currentVault->uuid) }}">Settings</a></li>
-                    @endif
-
                     @if(Auth::user()->vaults()->count() > 1)
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -68,8 +64,8 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                @foreach(Auth::user()->vaults->except(Auth::user()->current_vault_id) as $vault)
-                                    <li><a href="{{ route('vault.show', $vault->uuid) }}">{{ $vault->name }}</a></li>
+                                @foreach(Auth::user()->vaults as $vault)
+                                    <li @if($vault->id == Auth::user()->currentVault->id) class="active" @endif><a href="{{ route('vault.show', $vault->uuid) }}">{{ $vault->name }}</a></li>
                                 @endforeach
                             </ul>
                         </li>
