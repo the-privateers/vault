@@ -3,6 +3,7 @@
 namespace Vault\Vaults;
 
 
+use Vault\Files\FileRepository;
 use Vault\Lockboxes\LockboxRepository;
 use Vault\Users\User;
 use Vault\Users\UserRepository;
@@ -67,6 +68,17 @@ class VaultRepository
     public function destroy($vault)
     {
         if( ! is_object($vault)) $vault = $this->get($vault);
+
+        // Delete any files
+        if($vault->files()->count())
+        {
+            $fileRepository = new FileRepository();
+
+            foreach($vault->files as $file)
+            {
+                $fileRepository->destroy(['uuid' => $file->uuid]);
+            }
+        }
 
         return $vault->delete();
     }

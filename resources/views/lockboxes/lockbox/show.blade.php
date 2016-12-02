@@ -23,6 +23,7 @@
     @endif
 </div>
 
+@if($lockbox->secrets()->count())
 <div class="panel panel-default">
     <div class="panel-heading clearfix">
         <h3 class="panel-title pull-left">Secrets</h3>
@@ -52,35 +53,35 @@
         </table>
     </div>
 </div>
+@endif
 
-    @if($lockbox->files()->count())
-        <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-                <h3 class="panel-title pull-left">Files</h3>
+@if($lockbox->files()->count())
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        <h3 class="panel-title pull-left">Files</h3>
 
-                @if($lockbox->canBeEditedBy(Auth::user()))
-                    <a href="{{ route('file.edit', $lockbox->uuid) }}" class="btn btn-default btn-sm pull-right">Edit</a>
-                @endif
-            </div>
+        @if($lockbox->canBeEditedBy(Auth::user()))
+            <a href="{{ route('file.edit', $lockbox->uuid) }}" class="btn btn-default btn-sm pull-right">Edit</a>
+        @endif
+    </div>
 
-            <div class="panel-body">
-                <table class="table table-striped">
-                    <tbody>
-                    @foreach($lockbox->files as $file)
-                        <tr>
-                            <td>{{ $file->original_name }}</td>
-                            <td>{{ byte_format($file->size) }}</td>
-                            <td class="btn-column">
-                                <a href="{!! $file->present()->download() !!}" class="btn btn-default btn-sm">Download</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    @endif
+    <div class="panel-body">
+        <table class="table table-striped">
+            <tbody>
+            @foreach($lockbox->files as $file)
+                <tr>
+                    <td>{{ $file->original_name }}</td>
+                    <td>{{ byte_format($file->size) }}</td>
+                    <td class="btn-column">
+                        <a href="{!! $file->present()->download() !!}" class="btn btn-default btn-sm">Download</a>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+@endif
 
 @if( ! empty($lockbox->notes))
 <div class="panel panel-default">

@@ -3,6 +3,7 @@
 namespace Vault\Lockboxes;
 
 
+use Vault\Files\FileRepository;
 use Vault\Secrets\Secret;
 use Vault\Secrets\SecretRepository;
 use Vault\Uuid\UuidRepositoryTrait;
@@ -98,6 +99,17 @@ class LockboxRepository
     public function destroy($uuid)
     {
         $lockbox = $this->get($uuid);
+
+        // Remove all files
+        if($lockbox->files()->count())
+        {
+            $fileRepository = new FileRepository();
+
+            foreach($lockbox->files as $file)
+            {
+                $fileRepository->destroy(['uuid' => $file->uuid]);
+            }
+        }
 
         return $lockbox->delete();
     }
