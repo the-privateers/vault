@@ -29,7 +29,8 @@
         },
         "files": [
             "app/Helpers/string.php",
-            "app/Helpers/encrypt.php"
+            "app/Helpers/encrypt.php",
+            "app/Helpers/file.php"
         ]
     },
     "autoload-dev": {

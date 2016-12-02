@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('lockbox.partials.toolbar')
+    @include('lockboxes.partials.toolbar')
 
     {!! Form::open() !!}
 <div class="panel panel-default">
@@ -224,7 +224,7 @@
         });
     </script>
 
-    @include('lockbox.partials.handlebars.secret-row')
-    @include('lockbox.partials.handlebars.lockbox-row')
+    @include('lockboxes.partials.handlebars.secret-row')
+    @include('lockboxes.partials.handlebars.lockbox-row')
 
 @endsection

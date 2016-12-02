@@ -1,12 +1,13 @@
 <?php
 
-namespace Vault\Http\Controllers;
+namespace Vault\Http\Controllers\Lockboxes;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Vault\Http\Requests\Lockbox\CreateRequest;
 use Vault\Http\Requests\Lockbox\UpdateRequest;
 use Vault\Lockboxes\LockboxRepository;
+use Vault\Http\Controllers\Controller;
 
 class LockboxController extends Controller
 {
@@ -31,7 +32,7 @@ class LockboxController extends Controller
 
         $lockboxes = $this->lockboxRepository->getPaginated(\Auth::user()->currentVault);
 
-        return view('lockbox.index', compact('lockboxes'));
+        return view('lockboxes.lockbox.index', compact('lockboxes'));
     }
 
     public function show($uuid)
@@ -45,7 +46,7 @@ class LockboxController extends Controller
             return redirect()->route('lockbox.index');
         }
 
-        return view('lockbox.show', compact('lockbox'));
+        return view('lockboxes.lockbox.show', compact('lockbox'));
     }
 
     private function lockboxAccessible($lockbox)
@@ -64,7 +65,7 @@ class LockboxController extends Controller
 
     public function create()
     {
-        return view('lockbox.create');
+        return view('lockboxes.lockbox.create');
     }
 
     public function store(CreateRequest $request)
@@ -87,9 +88,7 @@ class LockboxController extends Controller
             return redirect()->route('lockbox.index');
         }
         
-        $linkableLockboxes = $this->lockboxRepository->getDropdownFor(Auth::user(), $lockbox->id);
-
-        return view('lockbox.edit', compact('lockbox', 'linkableLockboxes'));
+        return view('lockboxes.lockbox.edit', compact('lockbox'));
     }
 
     public function update(UpdateRequest $request, $uuid)

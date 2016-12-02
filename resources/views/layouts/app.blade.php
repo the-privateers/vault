@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css?ck=1" rel="stylesheet">
+    <link href="/js/vendor/easy-autocomplete/easy-autocomplete.min.css" rel="stylesheet">
 
     <!-- Fonts -->
     <link href="/fonts/privateers/styles.css" rel="stylesheet">
@@ -25,6 +26,8 @@
     @show
 </head>
 <body>
+    <div id="app">
+
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -53,8 +56,6 @@
                 @if (Auth::guest())
 
                 @else
-
-
                 <ul class="nav navbar-nav">
                     @if(Auth::user()->owns())
                         <li><a href="{{ route('vault.edit', Auth::user()->currentVault->uuid) }}">Settings</a></li>
@@ -74,6 +75,14 @@
                         </li>
                     @endif
                 </ul>
+
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        {!! Form::text('search', null, ['class' => 'form-control', 'placeholder' => 'Jump to lockbox...', 'role' => 'lockbox-autocomplete']) !!}
+                    </div>
+                </form>
+
+
                 @endif
 
                 <!-- Right Side Of Navbar -->
@@ -133,10 +142,34 @@
 
     </footer>
 
-
+    </div>
     @section('scripts')
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    @if(Auth::check())
+    <script src="/js/vendor/easy-autocomplete/jquery.easy-autocomplete.min.js"></script>
+
+    <script>
+        $('[role="lockbox-autocomplete"]').easyAutocomplete({
+            url: '{{ route('user.lockboxes', Auth::user()->uuid) }}',
+
+            getValue: function(element) {
+                return '[' + element.vault.name + '] ' + element.name;
+            },
+
+            list: {
+                match: {
+                    enabled: true
+                },
+                onChooseEvent: function() {
+                    var value = $('[role="lockbox-autocomplete"]').getSelectedItemData().uuid;
+
+                    window.location = '/lockbox/' + value;
+                }
+            }
+        });
+    </script>
+    @endif
     @show
 </body>
 </html>

@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => 'local',
+    'default' => env('DEFAULT_FILESYSTEM', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,10 +56,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => 'your-key',
-            'secret' => 'your-secret',
-            'region' => 'your-region',
-            'bucket' => 'your-bucket',
+            'key' => env('AWS_ACCESS_KEY', 'your-key'),
+            'secret' => env('AWS_SECRET', 'your-secret'),
+            'region' => env('AWS_REGION', 'your-region'),
+            'bucket' => env('AWS_BUCKET', 'your-bucket'),
         ],
 
     ],

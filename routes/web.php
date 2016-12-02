@@ -18,46 +18,6 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
 
-    Route::get('/home', [
-        'uses'  => 'LockboxController@index',
-        'as'    => 'lockbox.index'
-    ]);
-
-    Route::get('lockbox/create', [
-        'uses'  => 'LockboxController@create',
-        'as'    => 'lockbox.create'
-    ]);
-
-    Route::post('lockbox/create', [
-        'uses'  => 'LockboxController@store',
-        'as'    => 'lockbox.create'
-    ]);
-
-    Route::get('lockbox/{uuid}', [
-        'uses'  => 'LockboxController@show',
-        'as'    => 'lockbox.show'
-    ]);
-
-    Route::get('lockbox/{uuid}/edit', [
-        'uses'  => 'LockboxController@edit',
-        'as'    => 'lockbox.edit'
-    ]);
-
-    Route::post('lockbox/{uuid}/edit', [
-        'uses'  => 'LockboxController@update',
-        'as'    => 'lockbox.edit'
-    ]);
-
-    Route::post('lockbox/{uuid}/move', [
-        'uses'  => 'LockboxController@move',
-        'as'    => 'lockbox.move'
-    ]);
-
-    Route::delete('lockbox', [
-        'uses'  => 'LockboxController@destroy',
-        'as'    => 'lockbox.destroy'
-    ]);
-
     Route::get('user', [
         'uses'  => 'UserController@edit',
         'as'    => 'user.edit'
@@ -72,6 +32,84 @@ Route::group(['middleware' => 'auth'], function() {
         'uses'  => 'UserController@lockboxes',
         'as'    => 'user.lockboxes'
     ]);
+
+    Route::group(['namespace' => 'Lockboxes'], function() {
+
+        Route::get('/home', [
+            'uses'  => 'LockboxController@index',
+            'as'    => 'lockbox.index'
+        ]);
+
+        Route::get('lockbox/create', [
+            'uses'  => 'LockboxController@create',
+            'as'    => 'lockbox.create'
+        ]);
+
+        Route::post('lockbox/create', [
+            'uses'  => 'LockboxController@store',
+            'as'    => 'lockbox.create'
+        ]);
+
+        Route::get('lockbox/{uuid}', [
+            'uses'  => 'LockboxController@show',
+            'as'    => 'lockbox.show'
+        ]);
+
+        Route::get('lockbox/{uuid}/edit', [
+            'uses'  => 'LockboxController@edit',
+            'as'    => 'lockbox.edit'
+        ]);
+
+        Route::post('lockbox/{uuid}/edit', [
+            'uses'  => 'LockboxController@update',
+            'as'    => 'lockbox.edit'
+        ]);
+
+        Route::post('lockbox/{uuid}/move', [
+            'uses'  => 'LockboxController@move',
+            'as'    => 'lockbox.move'
+        ]);
+
+        Route::delete('lockbox', [
+            'uses'  => 'LockboxController@destroy',
+            'as'    => 'lockbox.destroy'
+        ]);
+
+        Route::get('lockbox/{uuid}/secrets', [
+            'uses'  => 'SecretController@edit',
+            'as'    => 'secret.edit'
+        ]);
+
+        Route::post('lockbox/{uuid}/secrets', [
+            'uses'  => 'SecretController@update',
+            'as'    => 'secret.edit'
+        ]);
+
+        Route::get('lockbox/{uuid}/file', [
+            'uses'  => 'FileController@edit',
+            'as'    => 'file.edit'
+        ]);
+
+        Route::post('lockbox/{uuid}/file', [
+            'uses'  => 'FileController@update',
+            'as'    => 'file.edit'
+        ]);
+
+        Route::post('lockbox/{uuid}/file/store', [
+            'uses'  => 'FileController@store',
+            'as'    => 'file.store'
+        ]);
+
+        Route::get('file/{hash}', [
+            'uses'  => 'FileController@show',
+            'as'    => 'file.show'
+        ]);
+
+        Route::delete('file', [
+            'uses'  => 'FileController@destroy',
+            'as'    => 'file.destroy'
+        ]);
+    });
 
     Route::group(['namespace' => 'Vaults'], function() {
         Route::get('vaults', [

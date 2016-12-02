@@ -5787,4 +5787,19 @@ h1.page-header a {
   h1.page-header a:hover {
     color: #000; }
 
+.nav-tabs > li.active > a {
+  background-color: #fff; }
+
+.nav-tabs a {
+  color: inherit; }
+
+.panel.has-tabs {
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; }
+
+th.btn-column,
+td.btn-column {
+  width: 1px; }
+
 /*# sourceMappingURL=app.css.map */

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('lockbox.partials.toolbar')
+@include('lockboxes.partials.toolbar')
 
 @forelse($lockboxes as $lockbox)
 <div class="panel panel-default">

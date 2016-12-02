@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<h1 class="page-header text-center" style="margin-top: 0; margin-bottom: 12px;">
+    <i class="icon-profile"></i><br />
+    Profile
+</h1>
 
 <div class="panel panel-default">
-    <div class="panel-heading"><h3 class="panel-title">Edit Profile</h3></div>
-
     <div class="panel-body">
         {!! Form::model(Auth::user()) !!}
 

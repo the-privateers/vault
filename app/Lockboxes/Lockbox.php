@@ -4,6 +4,7 @@ namespace Vault\Lockboxes;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Vault\Files\File;
 use Vault\Secrets\Secret;
 use Vault\Users\UserRepository;
 use Vault\Uuid\HasUuid;
@@ -23,6 +24,11 @@ class Lockbox extends Model
     public function secrets()
     {
         return $this->hasMany(Secret::class);
+    }
+
+    public function files()
+    {
+        return $this->hasMany(File::class);
     }
 
     public function canBeEditedBy($user)
