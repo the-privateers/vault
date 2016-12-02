@@ -1,5 +1,9 @@
 <script id="lockbox-row" type="text/x-handlebars-template">
     <tr id="_{{ uuid }}">
+        <td class="sort-handle">
+            <i class="icon-arrows"></i>
+            <input type="hidden" name="secrets[{{ uuid }}][sort_order]" role="sort-order">
+        </td>
         <td>
             <div class="form-group">
                 <input type="text" name="secrets[{{ uuid }}][key]" class="form-control" placeholder="Key/Label" required>

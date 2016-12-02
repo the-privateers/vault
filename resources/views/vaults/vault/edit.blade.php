@@ -11,11 +11,11 @@
         <a href="{{ route('vault.show', $vault->uuid) }}" class="btn btn-default btn-sm pull-right">Switch to Vault</a>
         @endif
     </div>
+    {!! Form::model($vault) !!}
+
+    {!! Form::hidden('uuid') !!}
 
     <div class="panel-body">
-        {!! Form::model($vault) !!}
-
-        {!! Form::hidden('uuid') !!}
 
         <!-- Name Form Input -->
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -42,12 +42,13 @@
             @endif
         </div>
 
-        <!-- Submit field -->
-        <div class="form-group">
-            {!! Form::submit('Save Changes', ['class' => 'btn btn-primary']) !!}
-        </div>
-        {!! Form::close() !!}
     </div>
+
+    <div class="panel-footer">
+        {!! Form::submit('Save Changes', ['class' => 'btn btn-primary']) !!}
+    </div>
+    {!! Form::close() !!}
+
 </div>
 
 <div class="panel panel-default">
@@ -55,8 +56,7 @@
         <h3 class="panel-title">Collaborators</h3>
     </div>
 
-    <div class="panel-body">
-        <table class="table table-striped">
+        <table class="table table-striped table-panel">
             <thead>
                 <tr>
                     <th>Email</th>
@@ -103,10 +103,10 @@
             </tbody>
         </table>
 
-
+    {!! Form::open(['route' => ['vault.user.add', $vault->uuid]]) !!}
+    <div class="panel-body">
         <p>Collaborators are not permitted to add additional collaborators or edit/delete the vault.</p>
 
-        {!! Form::open(['route' => ['vault.user.add', $vault->uuid]]) !!}
         <!-- Email Form Input -->
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
             {!! Form::label('email', 'Email Address:') !!}
@@ -125,14 +125,12 @@
                 </span>
             @endif
         </div>
-
-        <!-- Submit field -->
-        <div class="form-group">
-            {!! Form::submit('Add Collaborator', ['class' => 'btn btn-primary']) !!}
-        </div>
-
-        {!! Form::close() !!}
     </div>
+
+    <div class="panel-footer">
+        {!! Form::submit('Add Collaborator', ['class' => 'btn btn-primary']) !!}
+    </div>
+    {!! Form::close() !!}
 </div>
 
 <div class="panel panel-danger">
@@ -143,13 +141,13 @@
     <div class="panel-body">
         <p>Permanently delete this vault and all lockboxes/secrets within.  This action is instaneous and cannot be undone.</p>
 
-        <!-- Submit field -->
-        <div class="form-group">
-            {!! Form::model($vault, ['route' => 'vault.destroy', 'method' => 'DELETE', 'role' => 'destroy-vault']) !!}
-            {!! Form::hidden('uuid') !!}
-            {!! Form::submit('Delete Vault Now', ['class' => 'btn btn-danger']) !!}
-            {!! Form::close() !!}
-        </div>
+    </div>
+
+    <div class="panel-footer">
+        {!! Form::model($vault, ['route' => 'vault.destroy', 'method' => 'DELETE', 'role' => 'destroy-vault']) !!}
+        {!! Form::hidden('uuid') !!}
+        {!! Form::submit('Delete Vault Now', ['class' => 'btn btn-danger']) !!}
+        {!! Form::close() !!}
     </div>
 </div>
 @endsection

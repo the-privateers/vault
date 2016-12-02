@@ -37,11 +37,10 @@
                     </span>
                 @endif
             </div>
+    </div>
 
-            <!-- Submit field -->
-            <div class="form-group">
-                {!! Form::submit('Save Changes', ['class' => 'btn btn-primary']) !!}
-            </div>
+    <div class="panel-footer">
+        {!! Form::submit('Save Changes', ['class' => 'btn btn-primary']) !!}
     </div>
 </div>
 
@@ -62,12 +61,10 @@
             </span>
             @endif
         </div>
+    </div>
 
-        <!-- Submit field -->
-        <div class="form-group">
-            {!! Form::submit('Save Changes', ['class' => 'btn btn-primary']) !!}
-        </div>
-
+    <div class="panel-footer">
+        {!! Form::submit('Save Changes', ['class' => 'btn btn-primary']) !!}
     </div>
 </div>
 {!! Form::close() !!}
@@ -77,23 +74,24 @@
             <h3 class="panel-title">Move to another Vault</h3>
         </div>
 
+        {!! Form::open(['route' => ['lockbox.move', $lockbox->uuid]]) !!}
+
         <div class="panel-body">
             <p>Move this lockbox to another vault that you have write access to:</p>
-
-            {!! Form::open(['route' => ['lockbox.move', $lockbox->uuid]]) !!}
-                {!! Form::hidden('uuid', $lockbox->uuid) !!}
+             {!! Form::hidden('uuid', $lockbox->uuid) !!}
             <!-- Vault Form Input -->
             <div class="form-group">
                 {!! Form::label('vault', 'Vault:', ['class' => 'sr-only']) !!}
                 {!! Form::select('vault', Auth::user()->writableVaults->except($lockbox->vault_id)->pluck('name', 'uuid')->all(), null, ['class' => 'form-control']) !!}
             </div>
-            
-            <!-- Submit field -->
-            <div class="form-group">
-                {!! Form::submit('Move Lockbox Now', ['class' => 'btn btn-warning']) !!}
-            </div>
-            {!! Form::close() !!}
         </div>
+
+        <div class="panel-footer">
+            {!! Form::submit('Move Lockbox Now', ['class' => 'btn btn-warning']) !!}
+        </div>
+
+        {!! Form::close() !!}
+
     </div>
 
 <div class="panel panel-danger">
@@ -103,14 +101,13 @@
 
     <div class="panel-body">
         <p>Permanently delete this lockbox from the vault.  This action is instaneous and cannot be undone.</p>
+    </div>
 
-        <!-- Submit field -->
-        <div class="form-group">
-            {!! Form::model($lockbox, ['route' => 'lockbox.destroy', 'method' => 'DELETE', 'role' => 'destroy-lockbox']) !!}
-                {!! Form::hidden('uuid') !!}
-                {!! Form::submit('Delete Lockbox Now', ['class' => 'btn btn-danger']) !!}
-            {!! Form::close() !!}
-        </div>
+    <div class="panel-footer">
+        {!! Form::model($lockbox, ['route' => 'lockbox.destroy', 'method' => 'DELETE', 'role' => 'destroy-lockbox']) !!}
+        {!! Form::hidden('uuid') !!}
+        {!! Form::submit('Delete Lockbox Now', ['class' => 'btn btn-danger']) !!}
+        {!! Form::close() !!}
     </div>
 </div>
 @endsection

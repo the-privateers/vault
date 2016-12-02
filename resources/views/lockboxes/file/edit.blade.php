@@ -46,7 +46,7 @@
         </div>
 
         <div class="panel-footer" style="display: none;">
-            <button class="btn btn-default" role="start-upload">Upload Files</button>
+            <button class="btn btn-primary" role="start-upload">Upload Files</button>
         </div>
     </div>
 @endsection

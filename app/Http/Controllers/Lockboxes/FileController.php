@@ -76,6 +76,7 @@ class FileController extends Controller
             $file->file_name = $upload->store('uploads/' . $lockbox->uuid);
             $file->original_name = $upload->getClientOriginalName();
             $file->file_type = $upload->getClientMimeType();
+            $file->extension = $upload->getClientOriginalExtension();
             $file->size = $upload->getSize();
 
             $lockbox->files()->save($file);

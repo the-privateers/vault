@@ -9,8 +9,8 @@
         <h3 class="panel-title">Create Vault</h3>
     </div>
 
+    {!! Form::open() !!}
     <div class="panel-body">
-        {!! Form::open() !!}
         <!-- Name Form Input -->
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
             {!! Form::label('name', 'Name:', ['class' => 'control-label']) !!}
@@ -35,12 +35,11 @@
                 </span>
             @endif
         </div>
-
-        <!-- Submit field -->
-        <div class="form-group">
-            {!! Form::submit('Create Vault', ['class' => 'btn btn-primary']) !!}
-        </div>
-        {!! Form::close() !!}
     </div>
+
+    <div class="panel-footer">
+        {!! Form::submit('Create Vault', ['class' => 'btn btn-primary']) !!}
+    </div>
+    {!! Form::close() !!}
 </div>
 @endsection

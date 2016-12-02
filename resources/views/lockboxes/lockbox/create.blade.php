@@ -45,58 +45,23 @@
         <h3 class="panel-title">Add Secrets</h3>
     </div>
 
+    <table class="table table-striped table-sortable" id="secrets-table">
+        <thead>
+        <tr>
+            <th class="btn-column"></th>
+            <th style="width: 30%;">Key/Label</th>
+            <th>Value</th>
+            <th class="btn-column"><i class="icon-key" data-toggle="tooltip" title="Obscure value when viewing"></i></th>
+            <th class="btn-column"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        </tbody>
+    </table>
+
     <div class="panel-body">
-        <table class="table table-striped" id="secrets-table">
-            <thead>
-            <tr>
-                <th style="width: 30%;">Key/Label</th>
-                <th>Value</th>
-                <th style="width: 1px;"><i class="icon-key" data-toggle="tooltip" title="Obscure value when viewing"></i></th>
-                <th style="width: 1px;"></th>
-            </tr>
-            </thead>
-
-            <tbody>
-                {{--<tr id="_0">--}}
-                    {{--<td>--}}
-                        {{--<div class="form-group{{ $errors->has('secrets.0.key') ? ' has-error' : '' }}">--}}
-                            {{--{!! Form::label('secrets[0][key]', 'Key:', ['class' => 'sr-only']) !!}--}}
-
-                            {{--{!! Form::text('secrets[0][key]', null, ['class' => 'form-control', 'placeholder' => 'Key/Label']) !!}--}}
-
-                            {{--@if ($errors->has('secrets.0.key'))--}}
-                                {{--<span class="help-block">--}}
-                                    {{--<strong>{{ $errors->first('secrets.0.key') }}</strong>--}}
-                                {{--</span>--}}
-                            {{--@endif--}}
-                        {{--</div>--}}
-                    {{--</td>--}}
-
-                    {{--<td>--}}
-                        {{--<div class="form-group{{ $errors->has('secrets.0.value') ? ' has-error' : '' }}">--}}
-                            {{--{!! Form::label('secrets[0][value]', 'Description:', ['class' => 'sr-only']) !!}--}}
-
-                            {{--{!! Form::text('secrets[0][value]', null, ['class' => 'form-control', 'placeholder' => 'Value']) !!}--}}
-
-                            {{--@if ($errors->has('secrets.0.value'))--}}
-                                {{--<span class="help-block">--}}
-                                    {{--<strong>{{ $errors->first('secrets.0.value') }}</strong>--}}
-                                {{--</span>--}}
-                            {{--@endif--}}
-                        {{--</div>--}}
-                    {{--</td>--}}
-
-                    {{--<td>--}}
-                        {{--{!! Form::checkbox('secrets[0][paranoid]', 1) !!}--}}
-                    {{--</td>--}}
-
-                    {{--<td>--}}
-                        {{--<button class="btn btn-default btn-block" role="remove-secret" data-uuid="_0">Delete</button>--}}
-                    {{--</td>--}}
-                {{--</tr>--}}
-            </tbody>
-        </table>
-
         <div class="form-group">
             <button class="btn btn-default" role="add-secret">Add A Secret</button>
         </div>
@@ -129,11 +94,8 @@
 </div>
 
 <div class="panel panel-default">
-    <div class="panel-body">
-        <!-- Submit field -->
-        <div class="form-group">
-            {!! Form::submit('Create Lockbox', ['class' => 'btn btn-primary']) !!}
-        </div>
+    <div class="panel-footer">
+        {!! Form::submit('Create Lockbox', ['class' => 'btn btn-primary']) !!}
     </div>
 </div>
 
@@ -143,6 +105,7 @@
 @section('scripts')
     @parent
     <script src="/js/vendor/handlebars.js"></script>
+    <script src="/js/vendor/jquery.sortable.min.js"></script>
     <script src="/js/vendor/tinymce/tinymce.min.js"></script>
 
     <script>
@@ -184,6 +147,8 @@
 
             $('#secrets-table tbody').append(html);
 
+            doSorting();
+
             counter++;
 
         });
@@ -199,6 +164,8 @@
 
             $('#secrets-table tbody').append(html);
 
+            doSorting();
+
             counter++;
 
         });
@@ -212,6 +179,8 @@
 
             $('#' + uuid).remove();
 
+            doSorting();
+
             // Append something to the form
             $('<input type="hidden" value="1" />')
                     .attr("name", 'field[' + uuid + '][destroy]')
@@ -222,6 +191,40 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         });
+
+        function initSorting()
+        {
+            if($('#secrets-table').length) {
+                $('#secrets-table').sortable({
+                    group: 'secrets',
+                    containerSelector: 'table',
+                    itemPath: '> tbody',
+                    itemSelector: 'tr',
+                    placeholder: '<tr class="placeholder"/>',
+                    handle: 'td.sort-handle',
+                    onDrop: function ($item, container, _super) {
+                        $item.removeClass(container.group.options.draggedClass).removeAttr('style');
+                        $('body').removeClass(container.group.options.bodyClass);
+
+                        doSorting();
+
+                        _super($item, container);
+                    }
+                });
+            }
+        }
+
+        function doSorting()
+        {
+            var i = 0;
+            $('#secrets-table tbody tr').each(function() {
+                $('[role="sort-order"]', this).val(i);
+
+                i++;
+            });
+        }
+
+        initSorting();
     </script>
 
     @include('lockboxes.partials.handlebars.secret-row')

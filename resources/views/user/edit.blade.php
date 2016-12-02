@@ -7,10 +7,10 @@
 </h1>
 
 <div class="panel panel-default">
-    <div class="panel-body">
-        {!! Form::model(Auth::user()) !!}
+    {!! Form::model(Auth::user()) !!}
 
-            {!! Form::hidden('uuid', null) !!}
+    {!! Form::hidden('uuid', null) !!}
+    <div class="panel-body">
 
             <!-- Name Form Input -->
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -56,12 +56,13 @@
                 {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
             </div>
 
-            <!-- Submit field -->
-            <div class="form-group">
-                {!! Form::submit('Save Changes', ['class' => 'btn btn-primary']) !!}
-            </div>
-        {!! Form::close() !!}
     </div>
+
+    <div class="panel-footer">
+        {!! Form::submit('Save Changes', ['class' => 'btn btn-primary']) !!}
+    </div>
+
+    {!! Form::close() !!}
 </div>
 
 @endsection
