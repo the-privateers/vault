@@ -4,15 +4,15 @@ namespace Vault\Lockboxes;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Privateers\Uuid\EloquentUuid;
 use Vault\Files\File;
 use Vault\Secrets\Secret;
 use Vault\Users\UserRepository;
-use Vault\Uuid\HasUuid;
 use Vault\Vaults\Vault;
 
 class Lockbox extends Model
 {
-    use HasUuid;
+    use EloquentUuid;
 
     protected $fillable = ['name', 'description', 'notes'];
 

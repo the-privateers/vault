@@ -3,15 +3,15 @@
 namespace Vault\Vaults;
 
 
+use Privateers\Uuid\UuidRepository;
 use Vault\Files\FileRepository;
 use Vault\Lockboxes\LockboxRepository;
 use Vault\Users\User;
 use Vault\Users\UserRepository;
-use Vault\Uuid\UuidRepositoryTrait;
 
 class VaultRepository
 {
-    use UuidRepositoryTrait;
+    use UuidRepository;
 
     public function create($formData, $user)
     {

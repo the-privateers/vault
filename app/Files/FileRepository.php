@@ -4,11 +4,11 @@ namespace Vault\Files;
 
 
 use Illuminate\Support\Facades\Storage;
-use Vault\Uuid\UuidRepositoryTrait;
+use Privateers\Uuid\UuidRepository;
 
 class FileRepository
 {
-    use UuidRepositoryTrait;
+    use UuidRepository;
 
     public function destroy($formData)
     {

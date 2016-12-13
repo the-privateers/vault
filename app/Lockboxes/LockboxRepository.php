@@ -3,15 +3,15 @@
 namespace Vault\Lockboxes;
 
 
+use Privateers\Uuid\UuidRepository;
 use Vault\Files\FileRepository;
 use Vault\Secrets\Secret;
 use Vault\Secrets\SecretRepository;
-use Vault\Uuid\UuidRepositoryTrait;
 use Vault\Vaults\Vault;
 
 class LockboxRepository
 {
-    use UuidRepositoryTrait;
+    use UuidRepository;
 
     protected $getWith = ['secrets'];
 
@@ -23,13 +23,6 @@ class LockboxRepository
             ->where('control', false)
             ->orderBy('name')->paginate();
     }
-
-    //public function getListFor($id)
-    //{
-    //    return Lockbox::where('vault_id', $id)
-    //        ->where('control', false)
-    //        ->orderBy('name')->get();
-    //}
 
     public function getListFor($user)
     {

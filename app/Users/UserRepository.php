@@ -3,12 +3,12 @@
 namespace Vault\Users;
 
 
-use Vault\Uuid\UuidRepositoryTrait;
+use Privateers\Uuid\UuidRepository;
 use Vault\Vaults\Vault;
 
 class UserRepository
 {
-    use UuidRepositoryTrait;
+    use UuidRepository;
 
     public function create($formData)
     {

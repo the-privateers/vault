@@ -3,12 +3,12 @@
 namespace Vault\Secrets;
 
 
+use Privateers\Uuid\UuidRepository;
 use Vault\Lockboxes\Lockbox;
-use Vault\Uuid\UuidRepositoryTrait;
 
 class SecretRepository
 {
-    use UuidRepositoryTrait;
+    use UuidRepository;
 
     public function create($lockbox, $formData)
     {

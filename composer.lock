@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dd0c921467cd1d909538d925b1b7814f",
-    "content-hash": "319736ce8bd663c06960b0b64adc264d",
+    "hash": "14fc56860e66e53f4354d3444e90fc59",
+    "content-hash": "64e4f01f7fd51ad49825063b0cc31ad1",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1349,6 +1349,49 @@
                 "random"
             ],
             "time": "2016-11-07 23:38:38"
+        },
+        {
+            "name": "privateers/laravel-uuid",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/the-privateers/uuid.git",
+                "reference": "ac0f68e7294eccd5cc12d72e9d32ab6641ef7ec7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/the-privateers/uuid/zipball/ac0f68e7294eccd5cc12d72e9d32ab6641ef7ec7",
+                "reference": "ac0f68e7294eccd5cc12d72e9d32ab6641ef7ec7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "webpatser/laravel-uuid": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Privateers\\Uuid\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Phil Stephens",
+                    "email": "philthedeveloper@gmail.com"
+                }
+            ],
+            "description": "UUID utility traits for Laravel",
+            "homepage": "https://github.com/the-privateers/uuid",
+            "keywords": [
+                "eloquent",
+                "laravel",
+                "uuid"
+            ],
+            "time": "2016-12-13 03:44:32"
         },
         {
             "name": "psr/http-message",

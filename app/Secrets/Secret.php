@@ -5,12 +5,12 @@ namespace Vault\Secrets;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
+use Privateers\Uuid\EloquentUuid;
 use Vault\Lockboxes\Lockbox;
-use Vault\Uuid\HasUuid;
 
 class Secret extends Model
 {
-    use HasUuid, PresentableTrait;
+    use EloquentUuid, PresentableTrait;
 
     protected $presenter = SecretPresenter::class;
 

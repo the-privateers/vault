@@ -3,14 +3,14 @@
 namespace Vault\Vaults;
 
 use Illuminate\Database\Eloquent\Model;
+use Privateers\Uuid\EloquentUuid;
 use Vault\Files\File;
 use Vault\Lockboxes\Lockbox;
 use Vault\Users\User;
-use Vault\Uuid\HasUuid;
 
 class Vault extends Model
 {
-    use HasUuid;
+    use EloquentUuid;
 
     protected $fillable = ['name', 'description', 'use_passkey', 'passkey_reminder'];
 

@@ -4,12 +4,12 @@ namespace Vault\Files;
 
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
+use Privateers\Uuid\EloquentUuid;
 use Vault\Lockboxes\Lockbox;
-use Vault\Uuid\HasUuid;
 
 class File extends Model
 {
-    use HasUuid, PresentableTrait;
+    use EloquentUuid, PresentableTrait;
 
     protected $presenter = FilePresenter::class;
 

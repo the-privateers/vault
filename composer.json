@@ -1,18 +1,18 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "privateers/vault",
+    "description": "Secure all the things!",
+    "keywords": ["security", "laravel"],
     "license": "MIT",
     "type": "project",
     "require": {
         "php": ">=5.6.4",
         "laravel/framework": "5.3.*",
-        "webpatser/laravel-uuid": "^2.0",
         "laravelcollective/html": "^5.3",
         "laracasts/flash": "^2.0",
         "laracasts/presenter": "^0.2.1",
         "league/commonmark": "^0.15.1",
-        "league/flysystem-aws-s3-v3": "^1.0"
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "privateers/laravel-uuid": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

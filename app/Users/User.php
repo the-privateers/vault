@@ -5,14 +5,13 @@ namespace Vault\Users;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
-use Vault\Teams\Team;
-use Vault\Uuid\HasUuid;
+use Privateers\Uuid\EloquentUuid;
 use Vault\Vaults\Vault;
 use Vault\Vaults\VaultRepository;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasUuid;
+    use Notifiable, EloquentUuid;
 
     /**
      * The attributes that are mass assignable.
